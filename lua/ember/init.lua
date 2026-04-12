@@ -11,6 +11,7 @@ M.config = {
   on_colors = nil, -- function(palette) end — modify palette before theme
   on_highlights = nil, -- function(highlights, theme) end — modify highlights
   transparent = false,
+  transparent_floats = transparent,
 }
 
 function M.setup(opts)

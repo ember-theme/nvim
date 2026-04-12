@@ -12,10 +12,11 @@ local M = {}
 function M.setup(p, config)
   
   local transparent = config and config.transparent or false
+  local transparent_floats = config and config.transparent_floats or false
   -- sepparate bg elements
   local bg       = transparent and "NONE" or p.bg
   local bg_alt   = transparent and "NONE" or p.bg_alt
-  local float_bg = transparent and "NONE" or p.base0
+  local float_bg = transparent_floats and "NONE" or p.base0
   local bg_nc    = transparent and "NONE" or p.base5
 
   return {
