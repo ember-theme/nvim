@@ -44,7 +44,7 @@ M.get = function(theme)
 
     -- Status line
     StatusLine = { fg = ui.statusline_fg, bg = ui.statusline_bg },
-    StatusLineNC = { fg = ui.base5, bg = ui.base1 },
+    StatusLineNC = { fg = ui.fg_alt, bg = ui.bg_nc },
 
     -- Window separators
     WinSeparator = { fg = ui.border },

@@ -9,16 +9,24 @@ local M = {}
 --- Build the semantic theme table from a palette (as returned by palette.get()).
 ---@param p table  flat palette with bg, fg, accents, and ramp
 ---@return table   structured theme with ui, syn, diag, diff, term sections
-function M.setup(p)
+function M.setup(p, config)
   return {
+  local transparent = config and config.transparent or false
+  
+  -- sepparate bg elements
+  local bg       = transparent and "NONE" or p.bg
+  local bg_alt   = transparent and "NONE" or p.bg_alt
+  local float_bg = transparent and "NONE" or p.base0
+  local bg_nc    = transparent and "NONE" or p.base5
+
     --------------------------------------------------------------------------
     -- UI chrome
     --------------------------------------------------------------------------
     ui = {
       fg           = p.fg,
       fg_alt       = p.fg_alt,
-      bg           = p.bg,
-      bg_alt       = p.bg_alt,
+      bg           = bg,
+      bg_alt       = bg_alt,
 
       -- Full ramp exposed for one-off use
       base0        = p.base0,
@@ -36,7 +44,7 @@ function M.setup(p)
       highlight    = p.base4,
       border       = p.base4,
 
-      float_bg     = p.base0,       -- darker than editor for visual separation
+      float_bg     = float_bg,       -- darker than editor for visual separation
       float_border = p.base3,
 
       pmenu_bg     = p.base2,
