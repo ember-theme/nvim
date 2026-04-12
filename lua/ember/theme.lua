@@ -11,6 +11,11 @@ local M = {}
 ---@return table   structured theme with ui, syn, diag, diff, term sections
 function M.setup(p, config)
   
+  -- default to the same value as transparent
+  if config.transparent_floats == nil then
+    config.transparent_floats = config.transparent
+  end
+
   local transparent = config and config.transparent or false
   local transparent_floats = config and config.transparent_floats or false
   -- sepparate bg elements
