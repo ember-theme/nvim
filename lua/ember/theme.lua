@@ -8,17 +8,23 @@ local M = {}
 
 --- Build the semantic theme table from a palette (as returned by palette.get()).
 ---@param p table  flat palette with bg, fg, accents, and ramp
+---@param config table|nil optional setup options: `transparent` (boolean) and
+--- `transparent_floats` (boolean, defaults to `transparent` when nil)
 ---@return table   structured theme with ui, syn, diag, diff, term sections
 function M.setup(p, config)
+
+  config = config or {}
   
   -- default to the same value as transparent
-  if config.transparent_floats == nil then
-    config.transparent_floats = config.transparent
+  local transparent_floats = config.transparent_floats
+  if transparent_floats == nil then
+    transparent_floats = config.transparent
   end
 
-  local transparent = config and config.transparent or false
-  local transparent_floats = config and config.transparent_floats or false
-  -- sepparate bg elements
+  -- default to false
+  local transparent = config.transparent or false
+
+  -- separate bg elements
   local bg       = transparent and "NONE" or p.bg
   local bg_alt   = transparent and "NONE" or p.bg_alt
   local float_bg = transparent_floats and "NONE" or p.base0
@@ -34,6 +40,7 @@ function M.setup(p, config)
       fg_alt       = p.fg_alt,
       bg           = bg,
       bg_alt       = bg_alt,
+      bg_nc        = bg_nc,
 
       -- Full ramp exposed for one-off use
       base0        = p.base0,
@@ -65,7 +72,8 @@ function M.setup(p, config)
       search_fg    = p.bg,
 
       visual       = p.base4,
-      cursorline   = p.bg_alt,    -- Emacs: hl-line = #242320 = bg-alt
+      
+      cursorline   = transparent and p.base2 or p.bg_alt, -- Emacs: hl-line = #242320 = bg-alt
     },
 
     --------------------------------------------------------------------------
