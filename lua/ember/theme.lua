@@ -28,7 +28,6 @@ function M.setup(p, config)
   local bg       = transparent and "NONE" or p.bg
   local bg_alt   = transparent and "NONE" or p.bg_alt
   local float_bg = transparent_floats and "NONE" or p.base0
-  local bg_nc    = transparent and "NONE" or p.base5
 
   return {
 
@@ -40,7 +39,6 @@ function M.setup(p, config)
       fg_alt       = p.fg_alt,
       bg           = bg,
       bg_alt       = bg_alt,
-      bg_nc        = bg_nc,
 
       -- Full ramp exposed for one-off use
       base0        = p.base0,
