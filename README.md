@@ -77,8 +77,8 @@
 ### vim.pack
 
 ```lua
-vim.pack.add({ 'https://github.com/ember-theme/nvim' })
-vim.cmd.colorscheme('ember')
+vim.pack.add({ "https://github.com/ember-theme/nvim" })
+vim.cmd.colorscheme("ember")
 ```
 
 ## Configuration
@@ -106,7 +106,6 @@ Switch variants at runtime:
 :colorscheme ember-soft
 :colorscheme ember-light
 ```
-
 
 ## Plugin Support
 
