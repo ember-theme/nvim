@@ -65,6 +65,17 @@ M.get = function(theme)
     Added = { fg = diff.add },
     Changed = { fg = diff.change },
     Removed = { fg = diff.delete },
+
+    -- diff filetype syntax (*.patch, *.diff, git diff output)
+    diffAdded     = { fg = diff.add },
+    diffRemoved   = { fg = diff.delete },
+    diffChanged   = { fg = diff.change },
+    diffOldFile   = { fg = diff.delete, bold = true },
+    diffNewFile   = { fg = diff.add, bold = true },
+    diffFile      = { fg = syn.coral, bold = true },
+    diffLine      = { fg = syn.gold, italic = true },
+    diffIndexLine = { fg = syn.steel },
+    diffSubname   = { fg = ui.fg_alt, italic = true },
   }
 end
 

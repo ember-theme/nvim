@@ -92,7 +92,7 @@ M.get = function(theme)
     DiffAdd = { bg = diff.add_bg },
     DiffChange = { bg = diff.change_bg },
     DiffDelete = { bg = diff.delete_bg },
-    DiffText = { bg = diff.change_bg, bold = true },
+    DiffText = { fg = diff.change, bg = diff.text_bg, bold = true },
 
     -- Window bar
     WinBar = { fg = ui.fg, bold = true },

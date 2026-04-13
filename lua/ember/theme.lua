@@ -111,8 +111,10 @@ function M.setup(p)
 
       -- Subtle tinted backgrounds for diff regions
       add_bg    = util.blend(p.olive, p.bg, 0.15),
-      change_bg = util.blend(p.coral, p.bg, 0.15),
+      change_bg = util.blend(p.gold,  p.bg, 0.15),
       delete_bg = util.blend(p.rose,  p.bg, 0.15),
+      -- Stronger background for the exact changed text within a changed line
+      text_bg   = util.blend(p.gold,  p.bg, 0.30),
     },
 
     --------------------------------------------------------------------------
