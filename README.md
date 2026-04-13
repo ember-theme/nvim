@@ -74,6 +74,31 @@
 }
 ```
 
+### vim.pack
+
+```lua
+vim.pack.add({ 'https://github.com/ember-theme/nvim' })
+vim.cmd.colorscheme('ember')
+```
+
+## Configuration
+
+```lua
+require("ember").setup({
+  variant = "ember", -- "ember", "ember-soft", "ember-light"
+  styles = {
+    comments  = { italic = true },
+    keywords  = { bold = true },
+    functions = {},
+    types     = { bold = true },
+  },
+  transparent        = false, -- transparent editor background
+  transparent_floats = nil,   -- follows `transparent` by default; set explicitly to override
+  on_colors     = nil, -- function(palette) - modify palette before theme builds
+  on_highlights = nil, -- function(highlights, theme) - modify highlight groups
+})
+```
+
 Switch variants at runtime:
 
 ```
@@ -81,6 +106,7 @@ Switch variants at runtime:
 :colorscheme ember-soft
 :colorscheme ember-light
 ```
+
 
 ## Plugin Support
 
