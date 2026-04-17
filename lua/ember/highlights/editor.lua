@@ -21,6 +21,7 @@ M.get = function(theme)
     CursorLine = { bg = ui.cursorline },
     CursorColumn = { bg = ui.cursorline },
     CursorLineNr = { fg = syn.coral, bold = true },
+    ColorColumn = { bg = ui.cursorLine },
 
     -- Line numbers & signs
     LineNr = { fg = ui.base5 },
