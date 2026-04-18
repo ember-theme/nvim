@@ -67,7 +67,7 @@
   priority = 1000,
   config = function()
     require("ember").setup({
-      variant = "ember", -- "ember" | "ember-soft" | "ember-light"
+      variant = "ember", ---@type "ember" | "ember-soft" | "ember-light"
     })
     vim.cmd("colorscheme ember")
   end,
@@ -85,7 +85,7 @@ vim.cmd.colorscheme("ember")
 
 ```lua
 require("ember").setup({
-  variant = "ember", -- "ember", "ember-soft", "ember-light"
+  variant = "ember", ---@type "ember" | "ember-soft" | "ember-light"
   styles = {
     comments  = { italic = true },
     keywords  = { bold = true },
