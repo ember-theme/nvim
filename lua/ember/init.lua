@@ -1,7 +1,7 @@
 local M = {}
 
 M.config = {
-  variant = "ember", -- "ember", "ember-soft", "ember-light"
+  variant = "ember", -- "ember", "ember-soft", "ember-light", "ember-auto"
   styles = {
     comments = { italic = true },
     keywords = { bold = true },
@@ -12,14 +12,24 @@ M.config = {
   on_highlights = nil, -- function(highlights, theme) end — modify highlights
   transparent = false,
   transparent_floats = nil,
+  dark_variant = "ember", -- variant used by `ember-auto` when background = "dark"
+  light_variant = "ember-light", -- variant used by `ember-auto` when background = "light"
 }
 
 function M.setup(opts)
   M.config = vim.tbl_deep_extend("force", M.config, opts or {})
 end
 
+local AUTO_VARIANT = "ember-auto"
+
 function M.load(variant)
   variant = variant or M.config.variant
+
+  local is_auto = variant == AUTO_VARIANT
+  local resolved = variant
+  if is_auto then
+    resolved = (vim.o.background == "light") and M.config.light_variant or M.config.dark_variant
+  end
 
   -- Clear existing highlights
   if vim.g.colors_name then
@@ -27,11 +37,13 @@ function M.load(variant)
   end
 
   vim.o.termguicolors = true
-  vim.o.background = (variant == "ember-light") and "light" or "dark"
-  vim.g.colors_name = variant
+  if not is_auto then
+    vim.o.background = (resolved == "ember-light") and "light" or "dark"
+  end
+  vim.g.colors_name = is_auto and AUTO_VARIANT or resolved
 
   -- Build palette
-  local palette = require("ember.palette").get(variant)
+  local palette = require("ember.palette").get(resolved)
 
   -- User palette overrides
   if M.config.on_colors then
