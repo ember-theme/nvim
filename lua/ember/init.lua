@@ -1,23 +1,61 @@
 local M = {}
 
+---@alias Ember.Variant "ember" | "ember-soft" | "ember-light" | "ember-auto"
+---@alias Ember.ConcreteVariant "ember" | "ember-soft" | "ember-light"
+
+---@class Ember.Config
+---@field variant Ember.Variant
+---@field styles table
+---@field on_colors? fun(palette: table)
+---@field on_highlights? fun(highlights: table, theme: table)
+---@field transparent boolean
+---@field transparent_floats? boolean
+---@field dark_variant Ember.ConcreteVariant
+---@field light_variant Ember.ConcreteVariant
+
+---@type Ember.Config
 M.config = {
-  variant = "ember", -- "ember", "ember-soft", "ember-light", "ember-auto"
+  variant = "ember",
   styles = {
     comments = { italic = true },
     keywords = { bold = true },
     functions = {},
     types = { bold = true },
   },
-  on_colors = nil, -- function(palette) end — modify palette before theme
-  on_highlights = nil, -- function(highlights, theme) end — modify highlights
+  on_colors = nil,
+  on_highlights = nil,
   transparent = false,
   transparent_floats = nil,
-  dark_variant = "ember", -- variant used by `ember-auto` when background = "dark"
-  light_variant = "ember-light", -- variant used by `ember-auto` when background = "light"
+  dark_variant = "ember",
+  light_variant = "ember-light",
 }
 
+local VALID_VARIANTS = { ember = true, ["ember-soft"] = true, ["ember-light"] = true, ["ember-auto"] = true }
+local VALID_CONCRETE = { ember = true, ["ember-soft"] = true, ["ember-light"] = true }
+
+local function validate(key, value, allowed, default)
+  if allowed[value] then
+    return value
+  end
+  vim.notify(
+    string.format(
+      "ember: invalid %s = %q (allowed: %s). Falling back to %q.",
+      key,
+      tostring(value),
+      table.concat(vim.tbl_keys(allowed), ", "),
+      default
+    ),
+    vim.log.levels.ERROR
+  )
+  return default
+end
+
+---@param opts? Ember.Config
 function M.setup(opts)
   M.config = vim.tbl_deep_extend("force", M.config, opts or {})
+  M.config.variant = validate("variant", M.config.variant, VALID_VARIANTS, "ember")
+  M.config.dark_variant = validate("dark_variant", M.config.dark_variant, VALID_CONCRETE, "ember")
+  M.config.light_variant = validate("light_variant", M.config.light_variant, VALID_CONCRETE, "ember-light")
 end
 
 local AUTO_VARIANT = "ember-auto"
