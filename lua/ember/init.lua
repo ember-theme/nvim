@@ -13,6 +13,16 @@ local M = {}
 ---@field dark_variant Ember.ConcreteVariant
 ---@field light_variant Ember.ConcreteVariant
 
+---@class Ember.Options
+---@field variant? Ember.Variant
+---@field styles? table
+---@field on_colors? fun(palette: table)
+---@field on_highlights? fun(highlights: table, theme: table)
+---@field transparent? boolean
+---@field transparent_floats? boolean
+---@field dark_variant? Ember.ConcreteVariant
+---@field light_variant? Ember.ConcreteVariant
+
 ---@type Ember.Config
 M.config = {
   variant = "ember",
@@ -30,8 +40,13 @@ M.config = {
   light_variant = "ember-light",
 }
 
-local VALID_VARIANTS = { ember = true, ["ember-soft"] = true, ["ember-light"] = true, ["ember-auto"] = true }
-local VALID_CONCRETE = { ember = true, ["ember-soft"] = true, ["ember-light"] = true }
+local AUTO_VARIANT = "ember-auto"
+
+local VALID_CONCRETE = {}
+for _, name in ipairs(require("ember.palette").variants) do
+  VALID_CONCRETE[name] = true
+end
+local VALID_VARIANTS = vim.tbl_extend("force", {}, VALID_CONCRETE, { [AUTO_VARIANT] = true })
 
 local function validate(key, value, allowed, default)
   if allowed[value] then
@@ -50,7 +65,7 @@ local function validate(key, value, allowed, default)
   return default
 end
 
----@param opts? Ember.Config
+---@param opts? Ember.Options
 function M.setup(opts)
   M.config = vim.tbl_deep_extend("force", M.config, opts or {})
   M.config.variant = validate("variant", M.config.variant, VALID_VARIANTS, "ember")
@@ -58,10 +73,9 @@ function M.setup(opts)
   M.config.light_variant = validate("light_variant", M.config.light_variant, VALID_CONCRETE, "ember-light")
 end
 
-local AUTO_VARIANT = "ember-auto"
-
+---@param variant? Ember.Variant
 function M.load(variant)
-  variant = variant or M.config.variant
+  variant = validate("variant", variant or M.config.variant, VALID_VARIANTS, "ember")
 
   local is_auto = variant == AUTO_VARIANT
   local resolved = variant
