@@ -54,6 +54,7 @@
 <tr><td><code>ember</code></td><td><img src="https://img.shields.io/badge/%20-1c1b19?style=flat-square&color=1c1b19" /> <code>#1c1b19</code></td><td>Dark graphite, L10% — the default</td></tr>
 <tr><td><code>ember-soft</code></td><td><img src="https://img.shields.io/badge/%20-242320?style=flat-square&color=242320" /> <code>#242320</code></td><td>Lifted graphite, L13% — softer contrast</td></tr>
 <tr><td><code>ember-light</code></td><td><img src="https://img.shields.io/badge/%20-e6dac4?style=flat-square&color=e6dac4" /> <code>#e6dac4</code></td><td>Warm ivory, L84% — darkened accents for WCAG AA</td></tr>
+<tr><td><code>ember-auto</code></td><td>—</td><td>Follows <code>vim.o.background</code>; swaps between <code>dark_variant</code> and <code>light_variant</code></td></tr>
 </table>
 
 ## Installation
@@ -85,7 +86,7 @@ vim.cmd.colorscheme("ember")
 
 ```lua
 require("ember").setup({
-  variant = "ember", -- "ember", "ember-soft", "ember-light"
+  variant = "ember", -- "ember", "ember-soft", "ember-light", "ember-auto"
   styles = {
     comments  = { italic = true },
     keywords  = { bold = true },
@@ -94,6 +95,8 @@ require("ember").setup({
   },
   transparent        = false, -- transparent editor background
   transparent_floats = nil,   -- follows `transparent` by default; set explicitly to override
+  dark_variant       = "ember",       -- used by `ember-auto` when background = "dark"
+  light_variant      = "ember-light", -- used by `ember-auto` when background = "light"
   on_colors     = nil, -- function(palette) - modify palette before theme builds
   on_highlights = nil, -- function(highlights, theme) - modify highlight groups
 })
@@ -105,7 +108,10 @@ Switch variants at runtime:
 :colorscheme ember
 :colorscheme ember-soft
 :colorscheme ember-light
+:colorscheme ember-auto
 ```
+
+`ember-auto` follows `vim.o.background`: run `:set background=light` / `:set background=dark` (or let an OS-sync plugin toggle it) and the variant swaps automatically.
 
 ## Plugin Support
 
