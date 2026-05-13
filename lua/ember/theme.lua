@@ -24,11 +24,6 @@ function M.setup(p, config)
   -- default to false
   local transparent = config.transparent or false
 
-  -- separate bg elements
-  local bg       = transparent and "NONE" or p.bg
-  local bg_alt   = transparent and "NONE" or p.bg_alt
-  local float_bg = transparent_floats and "NONE" or p.base0
-
   return {
 
     --------------------------------------------------------------------------
@@ -37,8 +32,8 @@ function M.setup(p, config)
     ui = {
       fg           = p.fg,
       fg_alt       = p.fg_alt,
-      bg           = bg,
-      bg_alt       = bg_alt,
+      bg           = transparent and "NONE" or p.bg,
+      bg_alt       = transparent and "NONE" or p.bg_alt,
 
       -- Full ramp exposed for one-off use
       base0        = p.base0,
@@ -56,8 +51,8 @@ function M.setup(p, config)
       highlight    = p.base4,
       border       = p.base4,
 
-      float_bg     = float_bg,       -- darker than editor for visual separation
-      float_border = p.base3,
+      float_bg     = transparent_floats and "NONE" or p.base0,
+      float_border = transparent_floats and p.fg or p.base3,
 
       pmenu_bg     = p.base2,
       pmenu_sel    = p.base4,
