@@ -1,7 +1,7 @@
 local M = {}
 
----@alias Ember.Variant "ember" | "ember-soft" | "ember-light" | "ember-auto"
----@alias Ember.ConcreteVariant "ember" | "ember-soft" | "ember-light"
+---@alias Ember.Variant "ember" | "ember-soft" | "ember-light" | "ember-lighter" | "ember-auto"
+---@alias Ember.ConcreteVariant "ember" | "ember-soft" | "ember-light" | "ember-lighter"
 
 ---@class Ember.Config
 ---@field variant Ember.Variant
@@ -90,7 +90,7 @@ function M.load(variant)
 
   vim.o.termguicolors = true
   if not is_auto then
-    vim.o.background = (resolved == "ember-light") and "light" or "dark"
+    vim.o.background = (resolved == "ember-light" or resolved == "ember-lighter") and "light" or "dark"
   end
   vim.g.colors_name = is_auto and AUTO_VARIANT or resolved
 

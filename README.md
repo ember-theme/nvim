@@ -34,16 +34,19 @@
 <td align="center"><b>Ember</b><br><sub>dark graphite</sub></td>
 <td align="center"><b>Ember Soft</b><br><sub>lifted graphite</sub></td>
 <td align="center"><b>Ember Light</b><br><sub>warm ivory</sub></td>
+<td align="center"><b>Ember Lighter</b><br><sub>pale warm gray</sub></td>
 </tr>
 <tr>
 <td><img src="assets/ember.png" alt="Ember Dark" width="300" /></td>
 <td><img src="assets/ember-soft.png" alt="Ember Soft" width="300" /></td>
 <td><img src="assets/ember-light.png" alt="Ember Light" width="300" /></td>
+<td><img src="assets/ember-lighter.png" alt="Ember Lighter" width="300" /></td>
 </tr>
 <tr>
 <td><img src="assets/picker-ember.png" alt="Ember Picker" width="300" /></td>
 <td><img src="assets/picker-ember-soft.png" alt="Ember Soft Picker" width="300" /></td>
 <td><img src="assets/picker-ember-light.png" alt="Ember Light Picker" width="300" /></td>
+<td><img src="assets/picker-ember-lighter.png" alt="Ember Lighter Picker" width="300" /></td>
 </tr>
 </table>
 
@@ -54,6 +57,7 @@
 <tr><td><code>ember</code></td><td><img src="https://img.shields.io/badge/%20-1c1b19?style=flat-square&color=1c1b19" /> <code>#1c1b19</code></td><td>Dark graphite, L10% — the default</td></tr>
 <tr><td><code>ember-soft</code></td><td><img src="https://img.shields.io/badge/%20-242320?style=flat-square&color=242320" /> <code>#242320</code></td><td>Lifted graphite, L13% — softer contrast</td></tr>
 <tr><td><code>ember-light</code></td><td><img src="https://img.shields.io/badge/%20-e6dac4?style=flat-square&color=e6dac4" /> <code>#e6dac4</code></td><td>Warm ivory, L84% — darkened accents for WCAG AA</td></tr>
+<tr><td><code>ember-lighter</code></td><td><img src="https://img.shields.io/badge/%20-e8e4de?style=flat-square&color=e8e4de" /> <code>#e8e4de</code></td><td>Pale warm gray - more lighter variant</td></tr>
 <tr><td><code>ember-auto</code></td><td>—</td><td>Follows <code>vim.o.background</code>; swaps between <code>dark_variant</code> and <code>light_variant</code></td></tr>
 </table>
 
@@ -68,7 +72,7 @@
   priority = 1000,
   config = function()
     require("ember").setup({
-      variant = "ember", -- "ember" | "ember-soft" | "ember-light"
+      variant = "ember", -- "ember" | "ember-soft" | "ember-light" | "ember-lighter"
     })
     vim.cmd("colorscheme ember")
   end,
@@ -86,7 +90,7 @@ vim.cmd.colorscheme("ember")
 
 ```lua
 require("ember").setup({
-  variant = "ember", -- "ember", "ember-soft", "ember-light", "ember-auto"
+  variant = "ember", -- "ember", "ember-soft", "ember-light", "ember-lighter", "ember-auto"
   styles = {
     comments  = { italic = true },
     keywords  = { bold = true },
@@ -108,6 +112,7 @@ Switch variants at runtime:
 :colorscheme ember
 :colorscheme ember-soft
 :colorscheme ember-light
+:colorscheme ember-lighter
 :colorscheme ember-auto
 ```
 
