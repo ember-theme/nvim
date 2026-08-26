@@ -5,7 +5,7 @@
 local M = {}
 
 -- Available variant names
-M.variants = { "ember", "ember-soft", "ember-light" }
+M.variants = { "ember", "ember-soft", "ember-light", "ember-lighter" }
 
 -- Complete variant definitions with hand-tuned background ramps.
 -- Values taken directly from ember-theme.el / ember-soft-theme.el / ember-light-theme.el
@@ -57,6 +57,22 @@ local variants = {
     base8  = "#484030",  -- H40  S20% L24%
     fg     = "#282418",  -- H45  S25% L13%
     fg_alt = "#585040",  -- H40  S16% L30%
+  },
+  ["ember-lighter"] = {
+    type   = "light",
+    bg     = "#e8e4de",  -- cooler, matches website
+    bg_alt = "#dfd9d4",  -- slightly darker
+    base0  = "#f2efec",  -- lightest (lighter token)
+    base1  = "#e8e4de",  -- same as bg
+    base2  = "#dfd9d4",  -- bg_alt
+    base3  = "#d0ccc6",  -- mid
+    base4  = "#c8c2b8",  -- bg_highlight
+    base5  = "#a09484",  -- comment/muted
+    base6  = "#807868",  -- grey
+    base7  = "#585040",  -- fg_alt
+    base8  = "#3a3428",  -- fg
+    fg     = "#3a3428",  -- fg
+    fg_alt = "#585040",  -- fg_alt
   },
 }
 
